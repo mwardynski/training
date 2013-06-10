@@ -8,6 +8,7 @@
      http://www.springframework.org/schema/security/spring-security-3.1.xsd ">
 
     <security:http auto-config="true">
+        <security:http-basic/>
         <security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN"/>
     </security:http>
 
