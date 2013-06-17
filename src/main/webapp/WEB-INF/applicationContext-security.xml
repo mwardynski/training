@@ -11,8 +11,9 @@
         <security:form-login login-page="/custom_login" login-processing-url="/login_check"
                              authentication-failure-handler-ref="serverErrorHandler"
                              username-parameter="user_param" password-parameter="pass_param"/>
-        <security:intercept-url pattern="/admin/*" access="ROLE_ADMIN,IS_AUTHENTICATED_FULLY"/>
+        <security:intercept-url pattern="/admin/**/*" access="ROLE_ADMIN"/>
         <security:remember-me key="terror-key"/>
+        <security:logout delete-cookies="JSESSIONID" success-handler-ref="logoutRedirectToAny"/>
     </security:http>
 
     <security:authentication-manager>
@@ -32,6 +33,11 @@
                 <bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
             </list>
         </constructor-arg>
+    </bean>
+
+    <bean id="logoutRedirectToAny"
+          class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+        <property name="targetUrlParameter" value="redirectTo"/>
     </bean>
 
 </beans>
