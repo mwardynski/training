@@ -27,7 +27,7 @@ public class CustomInMemoryUserDetailsManager implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        User userNew = new User(user.getUsername(), user.getPassword(), user.getAuthorities(), user.getLastname());
+        User userNew = new User(user.getUsername(), user.getPassword(), user.getAuthorities(), user.getLastname(), user.getAge());
 
         return userNew;
     }
