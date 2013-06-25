@@ -14,6 +14,9 @@
         <security:intercept-url pattern="/movies/**/*" access="hasRole('ROLE_USER')"/>
         <security:intercept-url pattern="/j_spring_security_switch_user" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/j_spring_security_exit_user" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/custom_login" requires-channel="https"/>
+        <security:intercept-url pattern="/login_check" requires-channel="https"/>
+        <security:intercept-url pattern="/movies/*" access="hasAnyRole('ROLE_USER','ROLE_VIP')"/>
 
         <security:logout delete-cookies="JSESSIONID" success-handler-ref="logoutRedirectToAny"/>
         <security:form-login login-page="/custom_login" login-processing-url="/login_check"
@@ -58,6 +61,22 @@
                         </list>
                     </constructor-arg>
                     <constructor-arg value="Miranda"/>
+                    <constructor-arg value="20"/>
+                </bean>
+                <bean class="com.apress.pss.terrormovies.model.User">
+                    <constructor-arg value="lucas"/>
+                    <constructor-arg value="fernandez"/>
+                    <constructor-arg>
+                        <list>
+                            <bean class="org.springframework.security.core.authority.SimpleGrantedAuthority">
+                                <constructor-arg value="ROLE_VIP"/>
+                            </bean>
+                            <bean class="org.springframework.security.core.authority.SimpleGrantedAuthority">
+                                <constructor-arg value="ROLE_USER"/>
+                            </bean>
+                        </list>
+                    </constructor-arg>
+                    <constructor-arg value="Silva"/>
                     <constructor-arg value="20"/>
                 </bean>
             </list>
