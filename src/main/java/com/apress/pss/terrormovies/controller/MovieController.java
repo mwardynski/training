@@ -1,32 +1,26 @@
 package com.apress.pss.terrormovies.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.apress.pss.terrormovies.model.Movie;
+import com.apress.pss.terrormovies.service.MoviesService;
+
 @Controller
 @RequestMapping("/movies")
 public class MovieController {
 
-    private Map<Integer, String[]> likedMovies;
+    @Autowired
+    private MoviesService moviesService;
 
-    public MovieController() {
-        likedMovies = new HashMap<Integer, String[]>();
-        likedMovies.put(1, new String[]{"Die Hard", "Lethal Weapon"});
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/member/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{name}")
     @ResponseBody
-    public String getMoviesForMember(@PathVariable int id) {
-        StringBuilder builder = new StringBuilder();
-        for (String movie : likedMovies.get(id)) {
-            builder.append(movie).append(", ");
-        }
-        return builder.toString();
+    public String getMovieByName(@PathVariable String name) {
+        Movie movie = moviesService.getMovieByName(name);
+        return movie.toString();
     }
 }

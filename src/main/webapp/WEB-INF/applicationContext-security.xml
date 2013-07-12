@@ -63,4 +63,6 @@
             </list>
         </constructor-arg>
     </bean>
+
+    <bean id="moviesService" class="com.apress.pss.terrormovies.service.MoviesServiceImpl"/>
 </beans>

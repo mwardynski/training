@@ -18,4 +18,7 @@ public class Movie {
         return budget;
     }
 
+    public String toString() {
+        return "Title: " + name + "; Budget: " + budget;
+    }
 }
