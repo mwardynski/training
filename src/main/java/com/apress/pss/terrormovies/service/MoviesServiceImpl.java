@@ -1,12 +1,10 @@
 package com.apress.pss.terrormovies.service;
 
+import com.apress.pss.terrormovies.model.Movie;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.security.RolesAllowed;
-
-import org.springframework.security.access.annotation.Secured;
-
-import com.apress.pss.terrormovies.model.Movie;
 
 public class MoviesServiceImpl implements MoviesService {
 
@@ -16,7 +14,7 @@ public class MoviesServiceImpl implements MoviesService {
         MOVIES.put("die hard", new Movie("Die Hard", "20000000"));
     }
 
-    @RolesAllowed("ROLE_USER")
+    @PreAuthorize("#name.length() < 50 and hasRole('ROLE_USER')")
     public Movie getMovieByName(String name) {
         return MOVIES.get(name.toLowerCase());
     }
