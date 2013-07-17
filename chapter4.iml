@@ -53,6 +53,7 @@
     <orderEntry type="library" name="Maven: javax.annotation:jsr250-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp:jsp-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.7.0" level="project" />
   </component>
 </module>
 

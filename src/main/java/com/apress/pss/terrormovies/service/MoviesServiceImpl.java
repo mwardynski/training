@@ -17,23 +17,17 @@ public class MoviesServiceImpl implements MoviesService {
         MOVIES.put("two days in paris", new Movie("two days in paris ", "1000000"));
     }
 
-    //@PreAuthorize("#name.length() < 50 and hasRole('ROLE_USER')")
     @PostAuthorize("T(java.lang.Integer).parseInt(getReturnObject().budget) < 5000000")
     public Movie getMovieByName(String name) {
         return MOVIES.get(name.toLowerCase());
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PreFilter("not filterObject.contains('badword')")
     public void addNewMovies(List<String> movies) {
         for (String movie : movies) {
             MOVIES.put(movie, new Movie(movie, "10000"));
         }
     }
 
-    @PreAuthorize("isFullyAuthenticated()")
-    @PostFilter("hasRole('ROLE_ADMIN') or (hasRole('ROLE_USER') and  " +
-            "T(java.lang.Integer).parseInt(filterObject.budget) < 5000000)")
     public Collection<Movie> getAllMovies() {
         return new ArrayList<Movie>(MOVIES.values());
     }

@@ -8,7 +8,9 @@
             http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
     <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled"
-                                     pre-post-annotations="enabled"/>
+                                     pre-post-annotations="enabled">
+        <!--<security:protect-pointcut access="ROLE_ADMIN" expression="execution(* com.apress.pss.terrormovies.service.MoviesService.*(..))"/>-->
+    </security:global-method-security>
     <security:http auto-config="true"/>
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="inMemoryUserServiceWithCustomUser"/>
@@ -65,5 +67,11 @@
         </constructor-arg>
     </bean>
 
-    <bean id="moviesService" class="com.apress.pss.terrormovies.service.MoviesServiceImpl"/>
+    <bean id="moviesService" class="com.apress.pss.terrormovies.service.MoviesServiceImpl">
+        <security:intercept-methods>
+            <security:protect
+                    method="com.apress.pss.terrormovies.service.MoviesService.*"
+                    access="ROLE_ADMIN"/>
+        </security:intercept-methods>
+    </bean>
 </beans>
