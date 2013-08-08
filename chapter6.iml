@@ -23,8 +23,8 @@
     <output url="file://$MODULE_DIR$/chapter6/target/classes" />
     <output-test url="file://$MODULE_DIR$/chapter6/target/test-classes" />
     <content url="file://$MODULE_DIR$/chapter6">
-      <sourceFolder url="file://$MODULE_DIR$/chapter6/src/main/resources" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/chapter6/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/chapter6/src/main/resources" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/chapter6/target" />
     </content>
     <orderEntry type="inheritedJdk" />

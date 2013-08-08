@@ -9,7 +9,16 @@
         http://www.springframework.org/schema/security/spring-security-3.1.xsd
         http://www.springframework.org/schema/jdbc
         http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd">
-    <security:http auto-config="true">
-        <security:intercept-url pattern="/*" access="ROLE_USER" />
+    <security:http>
+        <security:x509 subject-principal-regex="CN=(.*?),"/>
+        <security:intercept-url pattern="/*" access="ROLE_ADMINISTRATOR" requires-channel="https" />
     </security:http>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="car" authorities="ROLE_ADMINISTRATOR" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
 </beans>
